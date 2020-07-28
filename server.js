@@ -27,7 +27,7 @@ app.use(express.json());
 // ========================================================================== //
 app.get("/api/notes", (req, res) => {
   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
-    if (err) return console.log(err);
+    if (err) return res.json(err);
     res.json(JSON.parse(data));
   });
 });
@@ -36,8 +36,9 @@ app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   // get current notes from db
   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
-    if (err) return console.log(err);
+    if (err) return res.json(err);
     let noteData = JSON.parse(data);
+    newNote.id = noteData[noteData.length - 1].id + 1;
     // add new note to db
     noteData.push(newNote);
     // save note to db
@@ -45,14 +46,33 @@ app.post("/api/notes", (req, res) => {
       path.join(__dirname, "db/db.json"),
       JSON.stringify(noteData),
       (err) => {
-        if (err) return console.log(err);
+        if (err) return res.json(err);
         res.json(newNote);
       }
     );
   });
 });
 
-app.delete("/api/notes/:id");
+app.delete("/api/notes/:id", (req, res) => {
+  // get id of note to be deleted
+  const delId = req.params.id;
+  // read note db
+  fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
+    if (err) return res.json(err);
+    const noteData = JSON.parse(data);
+    // filter out by note id
+    const noteRemoved = noteData.filter((note) => note.id != delId);
+    // write filtered array to db
+    fs.writeFile(
+      path.join(__dirname, "db/db.json"),
+      JSON.stringify(noteRemoved),
+      (err) => {
+        if (err) return res.json(err);
+        res.json(noteRemoved);
+      }
+    );
+  });
+});
 // ========================================================================== //
 
 // nav routes
