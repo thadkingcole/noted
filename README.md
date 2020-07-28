@@ -1,7 +1,7 @@
 # Noted!
 
-![GitHub top language](https://img.shields.io/github/languages/top/thadkingcole/noted)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0e6e197c61247f391793853d97800db)](https://app.codacy.com/manual/thadkingcole/noted?utm_source=github.com&utm_medium=referral&utm_content=thadkingcole/noted&utm_campaign=Badge_Grade_Dashboard)
+![GitHub top language](https://img.shields.io/github/languages/top/thadkingcole/noted)
 [![GitHub license](https://img.shields.io/github/license/thadkingcole/noted)](LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
