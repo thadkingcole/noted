@@ -10,12 +10,13 @@ const PORT = process.env.PORT || 5404; // Chiefs Super Bowls: LIV & IV
 // set up express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
 // api routes =============================================================== //
 app.get("/api/notes", (req, res) => {
   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
     if (err) return res.json(err);
-    res.json(JSON.parse(data));
+    data ? res.json(JSON.parse(data)) : res.json(false);
   });
 });
 
@@ -25,9 +26,13 @@ app.post("/api/notes", (req, res) => {
   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
     if (err) return res.json(err);
     let noteData = JSON.parse(data);
-    newNote.id = noteData[noteData.length - 1].id + 1;
+    if (noteData.length === 0) {
+      newNote.id = 0;
+    } else {
+      newNote.id = noteData[0].id + 1;
+    }
     // add new note to db
-    noteData.push(newNote);
+    noteData.unshift(newNote);
     // save note to db
     fs.writeFile(
       path.join(__dirname, "db/db.json"),
