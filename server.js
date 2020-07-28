@@ -11,20 +11,7 @@ const PORT = process.env.PORT || 5404; // Chiefs Super Bowls: LIV & IV
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// read notes
-// let notesdb = [];
-// function updateNotes() {
-//   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
-//     if (err) return console.log(err);
-//     notesdb = JSON.parse(data);
-//     // data.forEach(note => notesdb.push(note));
-//     // notesdb.push(data);
-//   });
-// }
-// updateNotes();
-
-// api routes
-// ========================================================================== //
+// api routes =============================================================== //
 app.get("/api/notes", (req, res) => {
   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
     if (err) return res.json(err);
@@ -75,8 +62,7 @@ app.delete("/api/notes/:id", (req, res) => {
 });
 // ========================================================================== //
 
-// nav routes
-// ========================================================================== //
+// nav routes =============================================================== //
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
