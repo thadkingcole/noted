@@ -27,7 +27,7 @@ app.post("/api/notes", (req, res) => {
     if (err) return res.json(err);
     let noteData = JSON.parse(data);
     if (noteData.length === 0) {
-      newNote.id = 0;
+      newNote.id = 1; // note id 0 cannot be read later, starting at 1 instead
     } else {
       newNote.id = noteData[0].id + 1;
     }
