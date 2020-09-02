@@ -7,8 +7,8 @@
 
 [A note taking app,](https://pure-woodland-39519.herokuapp.com/) powered by Express.js.
 
-[![screenshot](images/main.png)](https://pure-woodland-39519.herokuapp.com/)
-![notes page](images/notes.png)
+[![screenshot](./public/images/screenshot.png)](https://pure-woodland-39519.herokuapp.com/)
+![notes page](./public/images/notes.png)
 
 ## Table of Contents
 
@@ -33,7 +33,7 @@ Your notes are listed on the left side of the page.
 
 **To view one of these notes**: click on the note you wish to view.
 
-![noted gif](images/noted.gif)
+![noted gif](./public/images/noted.gif)
 
 [back to Table of Contents](#table-of-contents)
 

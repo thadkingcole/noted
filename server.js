@@ -1,18 +1,18 @@
-// required modules
+// * required modules
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-// set up express app
+// * set up express app
 const app = express();
 const PORT = process.env.PORT || 5404; // Chiefs Super Bowls: LIV & IV
 
-// set up express app to handle data parsing
+// * configure express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// api routes =============================================================== //
+// * api routes
 app.get("/api/notes", (req, res) => {
   fs.readFile(path.join(__dirname, "db/db.json"), "utf-8", (err, data) => {
     if (err) return res.json(err);
@@ -65,18 +65,16 @@ app.delete("/api/notes/:id", (req, res) => {
     );
   });
 });
-// ========================================================================== //
 
-// nav routes =============================================================== //
+// * html routes
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-// * means all other routes
+// "*" means all other routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
-// ========================================================================== //
 
-// starts server to begin listening
+// * starts server to begin listening
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
